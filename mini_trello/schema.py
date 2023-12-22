@@ -1,13 +1,13 @@
 import graphene
 from app import (
-    mutations as thread_mutations,
-    schema as thread_schema,
+    mutations as trello_mutations,
+    schema as trello_schema,
 )
 # from graphene.types.generic import GenericScalar
 
 
 class Query(
-    thread_schema.Query,
+    trello_schema.Query,
 
 ):
     pass
@@ -15,7 +15,7 @@ class Query(
 
 
 class Mutations(
-    thread_mutations.Mutation,
+    trello_mutations.Mutation,
 
 ):
     pass
