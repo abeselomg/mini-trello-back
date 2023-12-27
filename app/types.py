@@ -11,13 +11,6 @@ class BoardObject(graphene.ObjectType):
     # owner = graphene.Field(UserObject)
     members = graphene.List(UserObject)
 
-
-class ListObject(graphene.ObjectType):
-    list_id = graphene.ID()
-    board_id = graphene.ID()
-    name = graphene.String()
-
-
 class TaskObject(graphene.ObjectType):
     task_id = graphene.ID()
     list_id = graphene.ID()
@@ -25,3 +18,11 @@ class TaskObject(graphene.ObjectType):
     description = graphene.String()
     due_date = graphene.String()
     assigned_users = graphene.List(UserObject)
+    created_at = graphene.String()
+
+
+class ListObject(graphene.ObjectType):
+    list_id = graphene.ID()
+    board_id = graphene.ID()
+    name = graphene.String()
+    tasks= graphene.List(TaskObject)

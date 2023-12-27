@@ -82,8 +82,25 @@ class CreateTaskMutation(graphene.Mutation):
         return CreateTaskMutation(task=task)
 
 
+class MoveToListMutation(graphene.Mutation):
+    task = graphene.Field(TaskObject)
+
+    class Arguments:
+        task_id = graphene.ID(required=True)
+        list_id = graphene.ID(required=True)
+        new_list_id = graphene.ID(required=True)
+
+
+    def mutate(self, info, list_id, task_id,new_list_id):
+        task = Task.get(hash_key=task_id,range_key=list_id)
+        task.list_id = new_list_id
+        task.save()
+        return MoveToListMutation(task=task)
+
+
 class Mutation(graphene.ObjectType):
     create_user = CreateUserMutation.Field()
     create_board = CreateBoardMutation.Field()
     create_list = CreateListMutation.Field()
     create_task = CreateTaskMutation.Field()
+    move_task_to_list = MoveToListMutation.Field()

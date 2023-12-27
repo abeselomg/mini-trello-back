@@ -1,7 +1,7 @@
 import uuid
 from pynamodb.models import Model
 from pynamodb.attributes import UnicodeAttribute, UTCDateTimeAttribute, ListAttribute, BooleanAttribute,MapAttribute
-
+from datetime import datetime
 HOST = 'http://localhost:8000'
 
 class User(Model):
@@ -47,6 +47,7 @@ class Task(Model):
     description = UnicodeAttribute(null=True)
     due_date = UTCDateTimeAttribute(null=True)
     assigned_users = ListAttribute(of=BoardMember,default=[],null=True)
+    created_at=UTCDateTimeAttribute(null=True,default_for_new=datetime.now())
 
 
 
