@@ -16,15 +16,7 @@ services:
   #   networks:
   #     - py-network
 
-  # dynamodb:
-  #   image: amazon/dynamodb-local
-  #   ports:
-  #     - '8000:8000'
-  #   command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
-  #   volumes:
-  #    - dynamodb_data:/home/dynamodblocal/data
-  #   networks:
-  #     - py-network
+
   dynamodb:
     build:
       context: dynamodb
