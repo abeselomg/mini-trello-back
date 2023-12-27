@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  # trello-service:
+  #   build: mini-trello-back
+  #   image: trello-service
+  #   command: python manage.py runserver 0.0.0.0:7000
+  #   environment:
+  #     - DB_URL=http://0.0.0.0:8000
+  #   ports:
+  #     - '7000:7000'
+  #   depends_on:
+  #     - dynamodb
+  #   volumes:
+  #     - ./mini-trello-back:/app
+  #   networks:
+  #     - py-network
+
+  # dynamodb:
+  #   image: amazon/dynamodb-local
+  #   ports:
+  #     - '8000:8000'
+  #   command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
+  #   volumes:
+  #    - dynamodb_data:/home/dynamodblocal/data
+  #   networks:
+  #     - py-network
+  dynamodb:
+    build:
+      context: dynamodb
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - dynamodb_data:/home/dynamodblocal/db
+volumes:
+  dynamodb_data:
+
+networks:
+  py-network:
+    driver: bridge
